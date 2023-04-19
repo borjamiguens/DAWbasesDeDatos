@@ -137,9 +137,9 @@ GRANT RolProfesorado TO RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR
 #	CREATE VIEW ... AS SELECT ...;
 #*******************************************************************************************
 DROP VIEW IF EXISTS VistaModulosTotal; 		CREATE VIEW VistaModulosTotal AS SELECT * FROM modulo;
-DROP VIEW IF EXISTS VistaModulosASIR; 		CREATE VIEW VistaModulosAsir AS SELECT * FROM modulo WHERE ciclo = 'ASIR';
-DROP VIEW IF EXISTS VistaModulosDAM; 		CREATE VIEW VistaModulosAsir AS SELECT * FROM modulo WHERE ciclo = 'DAM';
-DROP VIEW IF EXISTS VistaModulosDAW; 		CREATE VIEW VistaModulosAsir AS SELECT * FROM modulo WHERE ciclo = 'DAW';
+DROP VIEW IF EXISTS VistaModulosASIR; 		CREATE VIEW VistaModulosASIR AS SELECT * FROM modulo WHERE ciclo = 'ASIR';
+DROP VIEW IF EXISTS VistaModulosDAM; 		CREATE VIEW VistaModulosDAM AS SELECT * FROM modulo WHERE ciclo = 'DAM';
+DROP VIEW IF EXISTS VistaModulosDAW; 		CREATE VIEW VistaModulosDAW AS SELECT * FROM modulo WHERE ciclo = 'DAW';
 #*******************************************************************************************
 #	ASIGNAMOS LOS PERMISOS A DIRECCIÓN Y A LOS GRUPOS DEL PROFESORADO
 #-------------------------------------------------------------------------------------------
@@ -147,9 +147,9 @@ DROP VIEW IF EXISTS VistaModulosDAW; 		CREATE VIEW VistaModulosAsir AS SELECT * 
 #*******************************************************************************************
 GRANT ALL ON modulo			 	TO RolDireccion;
 GRANT ALL ON VistaModulosTotal 	TO RolDireccion;
-GRANT ALL ON VistaModulosDAW 	TO RolProfesoradoDAW,RolDireccion;
-GRANT ALL ON VistaModulosDAM 	TO RolProfesoradoDAM,RolDireccion;
-GRANT ALL ON VistaModulosASIR 	TO RolProfesoradoASIR,RolDireccion;
+GRANT ALL ON VistaModulosDAW 	TO RolProfesoradoDAW, RolDireccion;
+GRANT ALL ON VistaModulosDAM 	TO RolProfesoradoDAM, RolDireccion;
+GRANT ALL ON VistaModulosASIR 	TO RolProfesoradoASIR, RolDireccion;
 
 #*******************************************************************************************
 #	CREAMOS LOS USUARIOS DE DIRECCIÓN CON DEFAULT ROLE
@@ -160,12 +160,11 @@ GRANT ALL ON VistaModulosASIR 	TO RolProfesoradoASIR,RolDireccion;
 #	CREATE USER <direccionN> IDENTIFIED BY 'dir' DEFAULT ROLE 'Rol1';
 #*******************************************************************************************
 DROP USER IF EXISTS Director, Vicedirector, Secretario, JefeEstudiosDiurno, JefeEstudiosNocturno;
-CREATE USER Director, Vicedirector, Secretario, JefeEstudiosDiurno, JefeEstudiosNocturno ;
-CREATE USER Director 				IDENTIFIED BY 'director' 				DEFAULT ROLE RolDirector;
-CREATE USER Vicedirector 			IDENTIFIED BY 'vicedirector' 			DEFAULT ROLE RolDirector;
-CREATE USER Secretario 				IDENTIFIED BY 'secretario' 				DEFAULT ROLE RolDirector;
-CREATE USER JefeEstudiosDiurno 		IDENTIFIED BY 'jefeEstudiosDiurno' 		DEFAULT ROLE RolDirector;
-CREATE USER JefeEstudiosNocturno 	IDENTIFIED BY 'jefeEstudiosNocturno' 	DEFAULT ROLE RolDirector;
+CREATE USER Director 				IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
+CREATE USER Vicedirector 			IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
+CREATE USER Secretario 				IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
+CREATE USER JefeEstudiosDiurno 		IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
+CREATE USER JefeEstudiosNocturno 	IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
 
 
 
@@ -178,28 +177,25 @@ CREATE USER JefeEstudiosNocturno 	IDENTIFIED BY 'jefeEstudiosNocturno' 	DEFAULT 
 #	CREATE USER <profesorN> IDENTIFIED BY 'pro' DEFAULT ROLE 'Rol2';
 #*******************************************************************************************
 DROP USER IF EXISTS  Prof_01DAM, Prof_02DAM, Prof_03DAM, Prof_04DAM, Prof_05DAM;
-CREATE USER Prof_01DAM, Prof_02DAM, Prof_03DAM, Prof_04DAM, Prof_05DAM;
-CREATE USER Prof_01DAM 				IDENTIFIED BY 'Prof_01DAM' 				DEFAULT ROLE RolProfesoradoDAM;
-CREATE USER Prof_02DAM 				IDENTIFIED BY 'Prof_02DAM' 				DEFAULT ROLE RolProfesoradoDAM;
-CREATE USER Prof_03DAM 				IDENTIFIED BY 'Prof_03DAM' 				DEFAULT ROLE RolProfesoradoDAM;
-CREATE USER Prof_04DAM 				IDENTIFIED BY 'Prof_04DAM' 				DEFAULT ROLE RolProfesoradoDAM;
-CREATE USER Prof_05DAM 				IDENTIFIED BY 'Prof_05DAM' 				DEFAULT ROLE RolProfesoradoDAM;
+CREATE USER Prof_01DAM 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAM;
+CREATE USER Prof_02DAM 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAM;
+CREATE USER Prof_03DAM 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAM;
+CREATE USER Prof_04DAM 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAM;
+CREATE USER Prof_05DAM 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAM;
 
 DROP USER IF EXISTS  Prof_01DAW, Prof_02DAW, Prof_03DAW, Prof_04DAW, Prof_05DAW;
-CREATE USER Prof_01DAW, Prof_02DAW, Prof_03DAW, Prof_04DAW, Prof_05DAW;
-CREATE USER Prof_01DAW 				IDENTIFIED BY 'Prof_01DAW' 				DEFAULT ROLE RolProfesoradoDAW;
-CREATE USER Prof_02DAW 				IDENTIFIED BY 'Prof_02DAW' 				DEFAULT ROLE RolProfesoradoDAW;
-CREATE USER Prof_03DAW 				IDENTIFIED BY 'Prof_03DAW' 				DEFAULT ROLE RolProfesoradoDAW;
-CREATE USER Prof_04DAW 				IDENTIFIED BY 'Prof_04DAW' 				DEFAULT ROLE RolProfesoradoDAW;
-CREATE USER Prof_05DAW 				IDENTIFIED BY 'Prof_05DAW' 				DEFAULT ROLE RolProfesoradoDAW;
+CREATE USER Prof_01DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
+CREATE USER Prof_02DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
+CREATE USER Prof_03DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
+CREATE USER Prof_04DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
+CREATE USER Prof_05DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
 
 DROP USER IF EXISTS  Prof_01ASIR, Prof_02ASIR, Prof_03ASIR, Prof_04ASIR, Prof_05ASIR;
-CREATE USER Prof_01ASIR, Prof_02ASIR, Prof_03ASIR, Prof_04ASIR, Prof_05ASIR;
-CREATE USER Prof_01ASIR 				IDENTIFIED BY 'Prof_01ASIR' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_02ASIR 				IDENTIFIED BY 'Prof_02ASIR' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_03ASIR 				IDENTIFIED BY 'Prof_03ASIR' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_04ASIR 				IDENTIFIED BY 'Prof_04ASIR' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_05ASIR 				IDENTIFIED BY 'Prof_05ASIR' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_01ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_02ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_03ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_04ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_05ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
 #*******************************************************************************************
 #	DAMOS LOS RESPECTIVOS PRIVILEGIOS A LOS GRUPOS DEL ALUMNADO
 #-------------------------------------------------------------------------------------------
@@ -207,9 +203,10 @@ CREATE USER Prof_05ASIR 				IDENTIFIED BY 'Prof_05ASIR' 				DEFAULT ROLE RolProf
 #	---------------------
 #	GRANT <permiso> ON <tabla> TO <RolN>;
 #*******************************************************************************************
-GRANT SELECT ON VistaModulosDAW TO RolProfesoradoDAW;
-GRANT SELECT ON VistaModulosDAM TO RolProfesoradoDAM;
-GRANT SELECT ON VistaModulosASIR TO RolProfesoradoASIR;
+GRANT SELECT ON VistaModulosDAW TO RolAlumnadoDAW;
+GRANT SELECT ON VistaModulosDAM TO RolAlumnadoDAM;
+GRANT SELECT ON VistaModulosASIR TO RolAlumnadoASIR;
+
 #*******************************************************************************************
 #	CREAMOS LOS USUARIOS, ASIGNÁNDOLES LOS ROLES CORRESPONDIENTES
 #-------------------------------------------------------------------------------------------
@@ -219,27 +216,24 @@ GRANT SELECT ON VistaModulosASIR TO RolProfesoradoASIR;
 #	CREATE USER <usuarioN> IDENTIFIED BY 'use' DEFAULT ROLE 'Rol3';
 #*******************************************************************************************
 DROP USER IF EXISTS  Al_01DAM, Al_02DAM, Al_03DAM, Al_04DAM, Al_05DAM;
-CREATE USER Al_01DAM, Al_02DAM, Al_03DAM, Al_04DAM, Al_05DAM;
-CREATE USER Al_01DAM 				IDENTIFIED BY 'Al_01DAM' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_02DAM 				IDENTIFIED BY 'Al_02DAM' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_03DAM 				IDENTIFIED BY 'Al_03DAM' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_04DAM 				IDENTIFIED BY 'Al_04DAM' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_05DAM 				IDENTIFIED BY 'Al_05DAM' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_01DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_02DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_03DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_04DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_05DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
 
 DROP USER IF EXISTS  Al_01DAW, Al_02DAW, Al_03DAW, Al_04DAW, Al_05DAW;
-CREATE USER Al_01DAW, Al_02DAW, Al_03DAW, Al_04DAW, Al_05DAW;
-CREATE USER Al_01DAW 				IDENTIFIED BY 'Al_01DAW' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_02DAW 				IDENTIFIED BY 'Al_02DAW' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_03DAW 				IDENTIFIED BY 'Al_03DAW' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_04DAW 				IDENTIFIED BY 'Al_04DAW' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_05DAW 				IDENTIFIED BY 'Al_05DAW' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_01DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_02DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_03DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_04DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_05DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
 
 DROP USER IF EXISTS  Al_01ASIR, Al_02ASIR, Al_03ASIR, Al_04ASIR, Al_05ASIR;
-CREATE USER Al_01ASIR, Al_02ASIR, Al_03ASIR, Al_04ASIR, Al_05ASIR;
-CREATE USER Al_01ASIR 				IDENTIFIED BY 'Al_01ASIR' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_02ASIR 				IDENTIFIED BY 'Al_02ASIR' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_03ASIR 				IDENTIFIED BY 'Al_03ASIR' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_04ASIR 				IDENTIFIED BY 'Al_04ASIR' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_05ASIR 				IDENTIFIED BY 'Al_05ASIR' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_01ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_02ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_03ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_04ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_05ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
 #*******************************************************************************************
 #*******************************************************************************************

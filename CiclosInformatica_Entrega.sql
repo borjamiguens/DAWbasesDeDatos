@@ -2,8 +2,8 @@
 #	CREACIÓN Y USO DE LA BASE DE DATOS 'CiclosInformatica'
 #*******************************************************************************************
 DROP DATABASE IF EXISTS CiclosInformatica;
-CREATE DATABASE CiclosInformatica;
-USE CiclosInformatica;
+CREATE DATABASE 		CiclosInformatica;
+USE 					CiclosInformatica;
 #*******************************************************************************************
 #	CREACIÓN DE LAS TABLAS DE LA BASE DE DATOS
 #*******************************************************************************************
@@ -37,14 +37,14 @@ CREATE TABLE modulo(
 
 ALTER TABLE modulo
 
-    ADD CONSTRAINT SIGLA_NOT_NULL CHECK (sigla IS NOT NULL),
-    ADD CONSTRAINT CODIGO_NOT_NULL CHECK (codigo IS NOT NULL),
-    ADD CONSTRAINT NOMBRE_NOT_NULL CHECK (nombre IS NOT NULL),
-    ADD CONSTRAINT HORAS_NOT_NULL CHECK (horas IS NOT NULL),
-    ADD CONSTRAINT SIGLA_NOT_EMPTY CHECK (sigla !=''),
-    ADD CONSTRAINT CODIGO_NOT_EMPTY CHECK (codigo !=''),
-    ADD CONSTRAINT NOMBRE_NOT_EMPTY CHECK (nombre !=''),
-    ADD CONSTRAINT HORAS_IS_POSITIVE CHECK (horas >=0),
+    ADD CONSTRAINT SIGLA_NOT_NULL 		CHECK (sigla IS NOT NULL),
+    ADD CONSTRAINT CODIGO_NOT_NULL 		CHECK (codigo IS NOT NULL),
+    ADD CONSTRAINT NOMBRE_NOT_NULL 		CHECK (nombre IS NOT NULL),
+    ADD CONSTRAINT HORAS_NOT_NULL 		CHECK (horas IS NOT NULL),
+    ADD CONSTRAINT SIGLA_NOT_EMPTY 		CHECK (sigla !=''),
+    ADD CONSTRAINT CODIGO_NOT_EMPTY 	CHECK (codigo !=''),
+    ADD CONSTRAINT NOMBRE_NOT_EMPTY 	CHECK (nombre !=''),
+    ADD CONSTRAINT HORAS_IS_POSITIVE 	CHECK (horas >=0),
     ADD INDEX INDEX_CODIGO (codigo);
     
     
@@ -158,10 +158,10 @@ GRANT ALL ON VistaModulosASIR 	TO RolProfesoradoASIR, RolDireccion;
 #*******************************************************************************************
 DROP USER IF EXISTS Director, Vicedirector, Secretario, JefeEstudiosDiurno, JefeEstudiosNocturno;
 CREATE USER Director 				IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
-CREATE USER Vicedirector 			IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
-CREATE USER Secretario 				IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
-CREATE USER JefeEstudiosDiurno 		IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
-CREATE USER JefeEstudiosNocturno 	IDENTIFIED BY 'dir' 	DEFAULT ROLE RolDireccion;
+CREATE USER Vicedirector 			IDENTIFIED BY 'vic' 	DEFAULT ROLE RolDireccion;
+CREATE USER Secretario 				IDENTIFIED BY 'sec' 	DEFAULT ROLE RolDireccion;
+CREATE USER JefeEstudiosDiurno 		IDENTIFIED BY 'jed' 	DEFAULT ROLE RolDireccion;
+CREATE USER JefeEstudiosNocturno 	IDENTIFIED BY 'jen' 	DEFAULT ROLE RolDireccion;
 
 
 
@@ -213,24 +213,24 @@ GRANT SELECT ON VistaModulosASIR 	TO RolAlumnadoASIR;
 #	CREATE USER <usuarioN> IDENTIFIED BY 'use' DEFAULT ROLE 'Rol3';
 #*******************************************************************************************
 DROP USER IF EXISTS  Al_01DAM, Al_02DAM, Al_03DAM, Al_04DAM, Al_05DAM;
-CREATE USER Al_01DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_02DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_03DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_04DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
-CREATE USER Al_05DAM 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_01DAM 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_02DAM 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_03DAM 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_04DAM 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAM;
+CREATE USER Al_05DAM 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAM;
 
 DROP USER IF EXISTS  Al_01DAW, Al_02DAW, Al_03DAW, Al_04DAW, Al_05DAW;
-CREATE USER Al_01DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_02DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_03DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_04DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
-CREATE USER Al_05DAW 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_01DAW 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_02DAW 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_03DAW 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_04DAW 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAW;
+CREATE USER Al_05DAW 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoDAW;
 
 DROP USER IF EXISTS  Al_01ASIR, Al_02ASIR, Al_03ASIR, Al_04ASIR, Al_05ASIR;
-CREATE USER Al_01ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_02ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_03ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_04ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
-CREATE USER Al_05ASIR 				IDENTIFIED BY 'use' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_01ASIR 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_02ASIR 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_03ASIR 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_04ASIR 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoASIR;
+CREATE USER Al_05ASIR 				IDENTIFIED BY 'abc' 				DEFAULT ROLE RolAlumnadoASIR;
 #*******************************************************************************************
 #*******************************************************************************************

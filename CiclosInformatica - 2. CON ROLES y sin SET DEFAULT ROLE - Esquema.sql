@@ -36,9 +36,7 @@ CREATE TABLE modulo(
 ) auto_increment=50;
 
 ALTER TABLE modulo
-	-- ADD CONSTRAINT PK_MODULO primary key (idModulo),
-    -- ADD CONSTRAINT UNIQUE_SIGLA unique (Sigla),
-	-- ADD CONSTRAINT UNIQUE_CODIGO unique (codigo),
+
     ADD CONSTRAINT SIGLA_NOT_NULL CHECK (sigla IS NOT NULL),
     ADD CONSTRAINT CODIGO_NOT_NULL CHECK (codigo IS NOT NULL),
     ADD CONSTRAINT NOMBRE_NOT_NULL CHECK (nombre IS NOT NULL),
@@ -103,7 +101,6 @@ INSERT INTO modulo (sigla,codigo,nombre,horas,curso,ciclo) VALUES
     
     
 SELECT * FROM modulo;
-#truncate modulo;
 #*******************************************************************************************
 #	CREAMOS LOS GRUPOS DE USUARIOS:	Direccion, Alumnado, Profesorado
 #		En Alumnado -> AlumnadoDAM, AlumnadoDAW, AlumnadoASIR, AlumnadoSMR, AlumnadoIO, AlumnadoIC
@@ -113,13 +110,13 @@ SELECT * FROM modulo;
 #	CREATE ROLE 	    <Rol1>, <Rol2>, ..., <RolN>;
 #*******************************************************************************************
 DROP ROLE IF EXISTS RolDireccion, RolAlumnado, RolProfesorado ;
-CREATE ROLE RolDireccion, RolAlumnado, RolProfesorado ;
+CREATE ROLE 		RolDireccion, RolAlumnado, RolProfesorado ;
 
 DROP ROLE IF EXISTS RolAlumnadoDAW, RolAlumnadoDAM, RolAlumnadoASIR;
-CREATE ROLE RolAlumnadoDAW, RolAlumnadoDAM, RolAlumnadoASIR;
+CREATE ROLE 		RolAlumnadoDAW, RolAlumnadoDAM, RolAlumnadoASIR;
 
 DROP ROLE IF EXISTS RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
-CREATE ROLE RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
+CREATE ROLE 		RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
 
 
 #*******************************************************************************************
@@ -127,8 +124,8 @@ CREATE ROLE RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
 #-------------------------------------------------------------------------------------------
 #	GRANT <RolGrupo> TO <RolComponente1>, <RolComponente2>, ..., <RolComponenteN>;
 #*******************************************************************************************
-GRANT RolAlumnado TO RolAlumnadoDAW, RolAlumnadoDAM, RolAlumnadoASIR;
-GRANT RolProfesorado TO RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
+GRANT RolAlumnado 		TO RolAlumnadoDAW, RolAlumnadoDAM, RolAlumnadoASIR;
+GRANT RolProfesorado 	TO RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR;
 
 #*******************************************************************************************
 #	CREAMOS LAS VISTAS ASOCIADAS A CADA CICLO FORMATIVO
@@ -136,10 +133,10 @@ GRANT RolProfesorado TO RolProfesoradoDAW, RolProfesoradoDAM, RolProfesoradoASIR
 #	DROP VIEW IF EXISTS ..., ..., ...;
 #	CREATE VIEW ... AS SELECT ...;
 #*******************************************************************************************
-DROP VIEW IF EXISTS VistaModulosTotal; 		CREATE VIEW VistaModulosTotal AS SELECT * FROM modulo;
-DROP VIEW IF EXISTS VistaModulosASIR; 		CREATE VIEW VistaModulosASIR AS SELECT * FROM modulo WHERE ciclo = 'ASIR';
-DROP VIEW IF EXISTS VistaModulosDAM; 		CREATE VIEW VistaModulosDAM AS SELECT * FROM modulo WHERE ciclo = 'DAM';
-DROP VIEW IF EXISTS VistaModulosDAW; 		CREATE VIEW VistaModulosDAW AS SELECT * FROM modulo WHERE ciclo = 'DAW';
+DROP VIEW IF EXISTS VistaModulosTotal; 		CREATE VIEW VistaModulosTotal 	AS SELECT * FROM modulo;
+DROP VIEW IF EXISTS VistaModulosASIR; 		CREATE VIEW VistaModulosASIR 	AS SELECT * FROM modulo WHERE ciclo = 'ASIR';
+DROP VIEW IF EXISTS VistaModulosDAM; 		CREATE VIEW VistaModulosDAM 	AS SELECT * FROM modulo WHERE ciclo = 'DAM';
+DROP VIEW IF EXISTS VistaModulosDAW; 		CREATE VIEW VistaModulosDAW 	AS SELECT * FROM modulo WHERE ciclo = 'DAW';
 #*******************************************************************************************
 #	ASIGNAMOS LOS PERMISOS A DIRECCIÓN Y A LOS GRUPOS DEL PROFESORADO
 #-------------------------------------------------------------------------------------------
@@ -191,11 +188,11 @@ CREATE USER Prof_04DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDA
 CREATE USER Prof_05DAW 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoDAW;
 
 DROP USER IF EXISTS  Prof_01ASIR, Prof_02ASIR, Prof_03ASIR, Prof_04ASIR, Prof_05ASIR;
-CREATE USER Prof_01ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_02ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_03ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_04ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
-CREATE USER Prof_05ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_01ASIR 			IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_02ASIR 			IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_03ASIR 			IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_04ASIR 			IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
+CREATE USER Prof_05ASIR 			IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoASIR;
 #*******************************************************************************************
 #	DAMOS LOS RESPECTIVOS PRIVILEGIOS A LOS GRUPOS DEL ALUMNADO
 #-------------------------------------------------------------------------------------------
@@ -203,9 +200,9 @@ CREATE USER Prof_05ASIR 				IDENTIFIED BY 'pro' 				DEFAULT ROLE RolProfesoradoA
 #	---------------------
 #	GRANT <permiso> ON <tabla> TO <RolN>;
 #*******************************************************************************************
-GRANT SELECT ON VistaModulosDAW TO RolAlumnadoDAW;
-GRANT SELECT ON VistaModulosDAM TO RolAlumnadoDAM;
-GRANT SELECT ON VistaModulosASIR TO RolAlumnadoASIR;
+GRANT SELECT ON VistaModulosDAW 	TO RolAlumnadoDAW;
+GRANT SELECT ON VistaModulosDAM 	TO RolAlumnadoDAM;
+GRANT SELECT ON VistaModulosASIR 	TO RolAlumnadoASIR;
 
 #*******************************************************************************************
 #	CREAMOS LOS USUARIOS, ASIGNÁNDOLES LOS ROLES CORRESPONDIENTES
